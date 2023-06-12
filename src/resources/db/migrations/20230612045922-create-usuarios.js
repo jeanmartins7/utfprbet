@@ -6,10 +6,10 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.UUID
+        type: Sequelize.INTEGER
       },
       usuario_id: {
-        type: Sequelize.UUID
+        type: Sequelize.INTEGER
       },
       nome: {
         type: Sequelize.STRING
