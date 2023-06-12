@@ -1,2 +1,14 @@
 npx sequelize db:migrate
 npx sequelize-cli db:seed:all
+
+
+get
+localhost:3000/usuarios?limite=1&pagina=1
+post:
+localhost:3000/usuarios
+{
+  "usuario_id": 6,
+  "nome": "jean",
+  "email": "jean@gmail.com",
+  "senha": "1234"
+}
