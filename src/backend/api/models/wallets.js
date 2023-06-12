@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
     pix: DataTypes.STRING
   }, {});
   wallets.associate = function(models) {
-    bets.belongsTo(models.usuarios, { foreignKey: 'usuario_id', unique: true });
+    wallets.belongsTo(models.usuarios, { foreignKey: 'usuario_id', unique: true });
   };
   return wallets;
 };
