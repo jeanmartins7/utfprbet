@@ -68,6 +68,20 @@ class UsuariosController {
     }
   }
 
+  static async deletaUsuario(req, res) {
+    const { id } = req.params;
+    try {
+      await database.usuarios.destroy({
+        where: {
+          id: Number(id),
+        },
+      });
+      return res.status(200).json({ message: 'Usuario deletada com sucesso.' });
+    } catch (error) {
+      return res.status(500).json(error.message);
+    }
+  }
+
   static async atualizaParcialUsuario(req, res) {
     const { id } = req.params;
     const novosDadosUsuario = req.body;

@@ -70,6 +70,20 @@ class BetsController {
     }
   }
 
+  static async deletaUmaBet(req, res) {
+    const { id } = req.params;
+    try {
+      await database.bets.destroy({
+        where: {
+          id: Number(id),
+        },
+      });
+      return res.status(200).json({ message: 'Aposta deletada com sucesso.' });
+    } catch (error) {
+      return res.status(500).json(error.message);
+    }
+  }
+
   static async atualizaParcialBet(req, res) {
     const { id } = req.params;
     const novosDadosBet = req.body;

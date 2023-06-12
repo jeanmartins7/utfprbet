@@ -8,5 +8,6 @@ router.get('/bets/:id', BetsController.pegaUmaBet);
 router.post('/bets', BetsController.criaBet);
 router.put('/bets/:id', BetsController.atualizaBet);
 router.patch('/bets/:id', BetsController.atualizaParcialBet);
+router.delete('/bets/:id', BetsController.deletaUmaBet);
 
 module.exports = router
