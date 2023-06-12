@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
     chute: DataTypes.STRING
   }, {});
   bets.associate = function(models) {
-    // associations can be defined here
+    bets.belongsTo(models.usuarios, { foreignKey: 'usuario_id' });
   };
   return bets;
 };
