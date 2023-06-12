@@ -2,10 +2,13 @@
 module.exports = (sequelize, DataTypes) => {
   const wallets = sequelize.define('wallets', {
     saldo: DataTypes.FLOAT,
-    pix: DataTypes.STRING
+    pix: DataTypes.STRING,
+    usuario_id: {
+      type: DataTypes.INTEGER,
+      unique: true
+    }
   }, {});
   wallets.associate = function(models) {
-    wallets.belongsTo(models.usuarios, { foreignKey: 'usuario_id', unique: true });
   };
   return wallets;
 };

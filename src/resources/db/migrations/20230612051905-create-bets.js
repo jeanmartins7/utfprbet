@@ -17,6 +17,9 @@ module.exports = {
       chute: {
         type: Sequelize.STRING
       },
+      usuario_id: {
+        type: Sequelize.INTEGER
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
