@@ -4,7 +4,7 @@ module.exports = (sequelize, DataTypes) => {
     valor: DataTypes.FLOAT,
     disciplina: DataTypes.STRING,
     chute: DataTypes.STRING,
-    usuario_id: DataTypes.INTEGER,
+    usuario_id: DataTypes.UUID,
   }, {});
   bets.associate = function(models) {
   };

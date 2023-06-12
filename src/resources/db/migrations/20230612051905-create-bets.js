@@ -4,9 +4,9 @@ module.exports = {
     return queryInterface.createTable('bets', {
       id: {
         allowNull: false,
-        autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.UUID, 
+        defaultValue: Sequelize.UUID
       },
       valor: {
         type: Sequelize.FLOAT
@@ -18,7 +18,8 @@ module.exports = {
         type: Sequelize.STRING
       },
       usuario_id: {
-        type: Sequelize.INTEGER
+        type: Sequelize.UUID, 
+        defaultValue: Sequelize.UUID
       },
       createdAt: {
         allowNull: false,

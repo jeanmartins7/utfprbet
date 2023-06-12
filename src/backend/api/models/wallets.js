@@ -4,7 +4,7 @@ module.exports = (sequelize, DataTypes) => {
     saldo: DataTypes.FLOAT,
     pix: DataTypes.STRING,
     usuario_id: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.UUID,
       unique: true
     }
   }, {});

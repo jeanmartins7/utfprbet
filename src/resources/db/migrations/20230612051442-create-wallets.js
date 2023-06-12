@@ -4,9 +4,9 @@ module.exports = {
     return queryInterface.createTable('wallets', {
       id: {
         allowNull: false,
-        autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.UUID, 
+        defaultValue: Sequelize.UUID
       },
       saldo: {
         type: Sequelize.FLOAT
@@ -15,7 +15,8 @@ module.exports = {
         type: Sequelize.STRING
       },
       usuario_id: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.UUID, 
+        defaultValue: Sequelize.UUID,
         unique: true
       },
       createdAt: {
