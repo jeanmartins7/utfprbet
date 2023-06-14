@@ -19,13 +19,16 @@
   },
   "homepage": "https://github.com/jeanmartins7/utfprbet#readme",
   "dependencies": {
-    "pg": "^8.2.1",
     "body-parser": "^1.19.0",
+    "dotenv": "^16.1.4",
+    "exec": "^0.2.1",
     "express": "^4.17.1",
     "mysql2": "^2.1.0",
     "path": "^0.12.7",
-    "sequelize": "^5.21.7",
-    "sequelize-cli": "^5.5.1"
+    "pg": "^8.2.1",
+    "sequelize": "^5.22.5",
+    "sequelize-cli": "^5.5.1",
+    "umzug": "^3.2.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.22"
