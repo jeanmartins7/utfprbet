@@ -1,8 +1,10 @@
 const { Router } = require('express')
 const WalletsController = require('../controllers/WalletsController')
+const autenticado = require('../middleware/autenticado')
 
 const router = Router()
 
+router.use(autenticado)
 
 router.get('/wallets', WalletsController.getAllWallets);
 router.get('/wallets/:id', WalletsController.getOneWallet);

@@ -8,10 +8,11 @@ const auth = require('./authRoute')
 module.exports = app => {
   app.use(
     bodyParser.json(),
+    auth,
     usuarios,
     bets,
     wallets,
-    install,
-    auth
+    install
+    
   )
 }

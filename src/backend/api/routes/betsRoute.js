@@ -1,7 +1,10 @@
 const { Router } = require('express')
 const BetsController = require('../controllers/BetsController')
+const autenticado = require('../middleware/autenticado')
 
 const router = Router()
+
+router.use(autenticado)
 
 router.get('/bets', BetsController.getAllBets);
 router.get('/bets/:id', BetsController.getOneBet);
