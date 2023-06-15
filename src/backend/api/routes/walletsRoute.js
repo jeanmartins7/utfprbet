@@ -4,12 +4,11 @@ const WalletsController = require('../controllers/WalletsController')
 const router = Router()
 
 
-router.get('/wallets', WalletsController.pegaTodasWallets);
-router.get('/wallets/:id', WalletsController.pegaUmaWallet);
-router.post('/wallets', WalletsController.criaWallet);
-router.put('/wallets/:id', WalletsController.atualizaWallet);
-router.put('/wallets/:id', WalletsController.atualizaWallet);
-router.delete('/wallets/:id', WalletsController.deletaWallet);
-router.patch('/wallets/:id', WalletsController.atualizaParcialWallet);
+router.get('/wallets', WalletsController.getAllWallets);
+router.get('/wallets/:id', WalletsController.getOneWallet);
+router.post('/wallets', WalletsController.createWallet);
+router.put('/wallets/:id', WalletsController.updateWallet);
+router.delete('/wallets/:id', WalletsController.deleteWallet);
+router.patch('/wallets/:id', WalletsController.updatePartialWallet);
 
 module.exports = router;

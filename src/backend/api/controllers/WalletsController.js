@@ -1,103 +1,66 @@
-const database = require('../models');
+const WalletsService = require('../services/WalletsService');
 
 class WalletsController {
-  static async pegaTodasWallets(req, res) {
+  static async getAllWallets(req, res) {
     const { limite = 10, pagina = 1 } = req.query;
-  
 
-    const valoresPermitidos = [5, 10, 30];
-    const limiteValido = valoresPermitidos.includes(Number(limite));
-    if (!limiteValido) {
-      return res.status(400).json({ error: 'O valor do limite não é válido.' });
-    }
-  
-    const offset = (pagina - 1) * limite;
     try {
-      const todasWallets = await database.wallets.findAndCountAll({
-        limit: Number(limite),
-        offset: offset
-      });
+      const todasWallets = await WalletsService.getAllWallets(limite, pagina);
       return res.status(200).json(todasWallets);
     } catch (error) {
-      return res.status(500).json(error.message);
+      return res.status(400).json({ error: error.message });
     }
   }
 
-  static async pegaUmaWallet(req, res) {
+  static async getOneWallet(req, res) {
     const { id } = req.params;
     try {
-      const wallet = await database.wallets.findOne({
-        where: {
-          id: Number(id)
-        }
-      });
+      const wallet = await WalletsService.getOneWallet(id);
       return res.status(200).json(wallet);
     } catch (error) {
-      return res.status(500).json(error.message);
+      return res.status(500).json({ error: error.message });
     }
   }
 
-  static async criaWallet(req, res) {
+  static async createWallet(req, res) {
     const novaWallet = req.body;
     try {
-      const novaWalletCriada = await database.wallets.create(novaWallet);
+      const novaWalletCriada = await WalletsService.createWallet(novaWallet);
       return res.status(200).json(novaWalletCriada);
     } catch (error) {
-      return res.status(500).json(error.message);
+      return res.status(500).json({ error: error.message });
     }
   }
 
-  static async atualizaWallet(req, res) {
+  static async updateWallet(req, res) {
     const { id } = req.params;
     const novosDadosWallet = req.body;
     try {
-      await database.wallets.update(novosDadosWallet, {
-        where: {
-          id: Number(id),
-        },
-      });
-      const walletAtualizada = await database.wallets.findOne({
-        where: {
-          id: Number(id),
-        },
-      });
+      const walletAtualizada = await WalletsService.updateWallet(id, novosDadosWallet);
       return res.status(200).json(walletAtualizada);
     } catch (error) {
-      return res.status(500).json(error.message);
+      return res.status(500).json({ error: error.message });
     }
   }
 
-  static async deletaWallet(req, res) {
+  static async deleteWallet(req, res) {
     const { id } = req.params;
     try {
-      await database.wallets.destroy({
-        where: {
-          id: Number(id),
-        },
-      });
+      await WalletsService.deleteWallet(id);
       return res.status(200).json({ message: 'Wallet deletada com sucesso.' });
     } catch (error) {
-      return res.status(500).json(error.message);
+      return res.status(500).json({ error: error.message });
     }
   }
 
-  static async atualizaParcialWallet(req, res) {
+  static async updatePartialWallet(req, res) {
     const { id } = req.params;
     const novosDadosWallet = req.body;
     try {
-      await database.wallets.update(novosDadosWallet, {
-        where: {
-          id: Number(id),
-        },
-      });
-      const walletAtualizada = await database.wallets.findOne({
-        where: {
-          id: Number(id),
-        },
-      });
+      const walletAtualizada = await WalletsService.updatePartialWallet(id, novosDadosWallet);
       return res.status(200).json(walletAtualizada);
     } catch (error) {
-      return res.status(500).json(error.message);
+      return res.status(500).json({ error: error.message });
     }
   }
 }

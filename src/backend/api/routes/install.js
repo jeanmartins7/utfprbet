@@ -5,4 +5,5 @@ const router = Router()
 
 router.get('/install', InstallController.install)
 
+
 module.exports = router

@@ -5,7 +5,15 @@ module.exports = (sequelize, DataTypes) => {
     nome: DataTypes.STRING,
     email: DataTypes.STRING,
     senha: DataTypes.STRING
-  }, {});
+  }, {
+    sequelize,
+    modelName: 'usuarios',
+    deefaultScope: {
+      attribute: {
+        exclude: ['senha']
+      }
+    }
+  });
   usuarios.associate = function(models) {
     // associations can be defined here
   };

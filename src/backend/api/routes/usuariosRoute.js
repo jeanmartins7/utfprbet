@@ -3,11 +3,11 @@ const UsuariosController = require('../controllers/UsuariosController')
 
 const router = Router()
 
-router.get('/usuarios', UsuariosController.pegaTodosUsuarios)
-router.get('/usuarios/:id', UsuariosController.pegaUmUsuario)
-router.post('/usuarios', UsuariosController.criaUsuario)
-router.put('/usuarios/:id', UsuariosController.atualizaUsuario)
-router.patch('/usuarios/:id', UsuariosController.atualizaParcialUsuario)
-router.delete('/usuarios/:id', UsuariosController.deletaUsuario);
+router.get('/usuarios', UsuariosController.getAllUsuarios)
+router.get('/usuarios/:id', UsuariosController.getOneUsuario)
+router.post('/usuarios', UsuariosController.createUsuario)
+router.put('/usuarios/:id', UsuariosController.updateUsuario)
+router.patch('/usuarios/:id', UsuariosController.updatePartialUsuario)
+router.delete('/usuarios/:id', UsuariosController.deleteUsuario);
 
 module.exports = router

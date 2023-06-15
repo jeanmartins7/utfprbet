@@ -3,11 +3,11 @@ const BetsController = require('../controllers/BetsController')
 
 const router = Router()
 
-router.get('/bets', BetsController.pegaTodasBets);
-router.get('/bets/:id', BetsController.pegaUmaBet);
-router.post('/bets', BetsController.criaBet);
-router.put('/bets/:id', BetsController.atualizaBet);
-router.patch('/bets/:id', BetsController.atualizaParcialBet);
-router.delete('/bets/:id', BetsController.deletaUmaBet);
+router.get('/bets', BetsController.getAllBets);
+router.get('/bets/:id', BetsController.getOneBet);
+router.post('/bets', BetsController.createBet);
+router.put('/bets/:id', BetsController.updateBet);
+router.patch('/bets/:id', BetsController.updatePartialBet);
+router.delete('/bets/:id', BetsController.deleteBet);
 
 module.exports = router
