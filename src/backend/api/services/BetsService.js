@@ -37,7 +37,13 @@ class BetsService {
 
   static async createBet(novaBet) {
     try {
-      const novaBetCriada = await database.bets.create(novaBet);
+      const novaBetCriada = await database.bets.create({
+        id: uuid.v4(),
+        usuario_id: novaBet.usuario_id,
+        valor: novaBet.valor,
+        disciplina: novaBet.disciplina,
+        chute: novaBet.chute
+      });
       return novaBetCriada;
     } catch (error) {
       throw new Error(error.message);

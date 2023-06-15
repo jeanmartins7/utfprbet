@@ -1,4 +1,6 @@
 const database = require('../models');
+const { hash } = require('bcryptjs');
+const uuid = require('uuid');
 
 class UsuariosService {
   static async getAllUsuarios(limite, pagina) {
@@ -35,8 +37,29 @@ class UsuariosService {
   }
 
   static async createUsuario(novoUsuario) {
+    const { email } = novoUsuario;
+
+    const usuarioExistente = await database.usuarios.findOne({
+      where: {
+        email: email
+      }
+    });
+
+    if (usuarioExistente) {
+      throw new Error('Email já cadastrado. Por favor, escolha outro email.');
+    }
+
     try {
-      const novoUsuarioCriado = await database.usuarios.create(novoUsuario);
+      
+      const senhaHash = await hash(novoUsuario.senha, 8)
+
+      const novoUsuarioCriado = await database.usuarios.create({
+          id: uuid.v4(),
+          usuario_id: uuid.v4(),
+          nome: novoUsuario.nome,
+          email: novoUsuario.email,
+          senha: senhaHash
+      });
       return novoUsuarioCriado;
     } catch (error) {
       throw new Error(error.message);

@@ -36,7 +36,12 @@ class WalletsService {
 
   static async createWallet(novaWallet) {
     try {
-      const novaWalletCriada = await database.wallets.create(novaWallet);
+      const novaWalletCriada = await database.wallets.create({
+        id: uuid.v4(),
+        usuario_id: novaWallet.usuario_id,
+        saldo: novaWallet.saldo,
+        pix: novaWallet.pix
+      });
       return novaWalletCriada;
     } catch (error) {
       throw new Error(error.message);
