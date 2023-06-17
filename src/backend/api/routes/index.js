@@ -2,8 +2,11 @@ const bodyParser = require('body-parser')
 const usuarios = require('./usuariosRoute')
 const bets = require('./betsRoute')
 const wallets = require('./walletsRoute')
-const install = require('./install')
 const auth = require('./authRoute')
+const role = require('./role')
+const permissao = require('./permissao')
+const install = require('./install')
+
 
 module.exports = app => {
   app.use(
@@ -12,6 +15,8 @@ module.exports = app => {
     usuarios,
     bets,
     wallets,
+    role,
+    permissao,
     install
     
   )
