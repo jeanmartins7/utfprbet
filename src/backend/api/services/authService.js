@@ -2,6 +2,7 @@ const database = require('../models')
 const { compare } = require('bcryptjs')
 const { sign } = require('jsonwebtoken')
 const jsonSecret = require('../../../resources/db/config/jsonSecret')
+const { hash } = require('bcryptjs');
 
 class AuthService {
     async login(dto) {
@@ -15,6 +16,7 @@ class AuthService {
         if (!usuario) {
             throw new Error('Usuario não cadastrado')
         }
+
 
         const senhaIguais = await compare(dto.senha, usuario.senha)
 
