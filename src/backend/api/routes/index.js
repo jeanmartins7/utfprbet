@@ -5,6 +5,7 @@ const wallets = require('./walletsRoute')
 const auth = require('./authRoute')
 const role = require('./role')
 const permissao = require('./permissao')
+const seguranca = require('./seguranca')
 const install = require('./install')
 
 
@@ -17,6 +18,7 @@ module.exports = app => {
     wallets,
     role,
     permissao,
+    seguranca,
     install
     
   )

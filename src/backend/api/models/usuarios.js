@@ -25,6 +25,16 @@ module.exports = (sequelize, DataTypes) => {
       as: 'usuario_permissoes',
       foreignKey: 'usuario_id'
     })
+    usuarios.belongsToMany(models.bets, {
+      through: models.bets_usuarios,
+      as: 'bet_usuario',
+      foreignKey: 'usuario_id'
+    })
+    usuarios.belongsTo(models.wallets, {
+      through: models.wallets_usuarios,
+      as: 'wallet_usuario',
+      foreignKey: 'usuario_id'
+    })
   };
   return usuarios;
 };
