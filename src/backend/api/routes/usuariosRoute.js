@@ -7,12 +7,11 @@ const router = Router()
 
 router.use(autenticado)
 
-router.get('/usuarios', roles(["gerente"]), UsuariosController.getAllUsuarios)
-router.get('/usuarios/:id', roles(["jogador", "gerente"]), UsuariosController.getOneUsuario)
-router.post('/usuarios', UsuariosController.createUsuario)
-router.post('/usuarios/adm',roles([ "gerente"]), UsuariosController.createUsuarioADM)
-router.put('/usuarios/:id', roles(["gerente"]),UsuariosController.updateUsuario)
-router.patch('/usuarios/:id', roles(["jogador", "gerente"]),UsuariosController.updatePartialUsuario)
-router.delete('/usuarios/:id', roles(["gerente"]),UsuariosController.deleteUsuario);
+router.get('/usuarios', roles(["deus"]), UsuariosController.getAllUsuarios)
+router.get('/usuarios/:id', roles(["adm","deus", "jogador"]), UsuariosController.getOneUsuario)
+router.post('/usuarios', roles(["deus"]), UsuariosController.createUsuario)
+router.put('/usuarios/:id', roles(["deus"]),UsuariosController.updateUsuario)
+router.patch('/usuarios/:id', roles(["deus","adm", "jogador"]),UsuariosController.updatePartialUsuario)
+router.delete('/usuarios/:id', roles(["deus","adm"]),UsuariosController.deleteUsuario);
 
 module.exports = router

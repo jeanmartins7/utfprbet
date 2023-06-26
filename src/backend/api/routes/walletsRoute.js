@@ -7,11 +7,11 @@ const router = Router()
 
 router.use(autenticado)
 
-router.get('/wallets', roles(["gerente"]),WalletsController.getAllWallets);
-router.get('/wallets/:id',roles(["jogador", "gerente"]),WalletsController.getOneWallet);
-router.post('/wallets', roles(["gerente"]),WalletsController.createWallet);
-router.put('/wallets/:id', roles([ "gerente"]), WalletsController.updateWallet);
-router.delete('/wallets/:id', roles([ "gerente"]),WalletsController.deleteWallet);
-router.patch('/wallets/:id', roles(["jogador", "gerente"]),WalletsController.updatePartialWallet);
+router.get('/wallets', roles(["adm","deus"]),WalletsController.getAllWallets);
+router.get('/wallets/:id',roles(["adm","deus", "jogador"]),WalletsController.getOneWallet);
+router.post('/wallets', roles(["adm","deus"]),WalletsController.createWallet);
+router.put('/wallets/:id', roles(["adm","deus"]), WalletsController.updateWallet);
+router.delete('/wallets/:id', roles(["deus"]),WalletsController.deleteWallet);
+router.patch('/wallets/:id', roles(["adm","deus", "jogador"]),WalletsController.updatePartialWallet);
 
 module.exports = router;

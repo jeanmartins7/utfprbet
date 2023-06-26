@@ -5,10 +5,10 @@ const roles = require('../middleware/roles')
 const router = Router()
 
 router
-    .post('/permissao', roles(["gerente"]),PermissaoController.cadastrar)
-    .get('/permissao', roles([ "gerente"]),PermissaoController.buscarTodasPermissoes)
-    .get('/permissao/id/:id', roles([ "gerente"]),PermissaoController.buscarPermissaoPorId)
-    .delete('/permissao/id/:id', roles(["gerente"]),PermissaoController.deletarPermissaoPorId)
-    .put('/permissao/id/:id',roles(["gerente"]), PermissaoController.editarPermissao)
+    .post('/permissao', roles(["deus","adm"]),PermissaoController.cadastrar)
+    .get('/permissao', roles(["deus","adm"]),PermissaoController.buscarTodasPermissoes)
+    .get('/permissao/id/:id', roles(["deus","adm"]),PermissaoController.buscarPermissaoPorId)
+    .delete('/permissao/id/:id', roles(["deus","adm"]),PermissaoController.deletarPermissaoPorId)
+    .put('/permissao/id/:id',roles(["deus","adm" ]), PermissaoController.editarPermissao)
 
 module.exports = router
