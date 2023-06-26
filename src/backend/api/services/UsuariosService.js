@@ -27,7 +27,7 @@ class UsuariosService {
     try {
       const usuario = await database.usuarios.findOne({
         where: {
-          id: Number(id)
+          id: String(id)
         }
       });
       return usuario;
@@ -53,13 +53,56 @@ class UsuariosService {
       
       const senhaHash = await hash(novoUsuario.senha, 8)
 
-      const novoUsuarioCriado = await database.usuarios.create({
+      const [novoUsuarioCriado, novaWalletCriada, novoWalletUsuario] = await Promise.all([
+        database.usuarios.create({
           id: uuid.v4(),
-          usuario_id: uuid.v4(),
           nome: novoUsuario.nome,
           email: novoUsuario.email,
-          senha: senhaHash
-      });
+          senha: senhaHash,
+          wallet: {
+            id: uuid.v4(),
+            saldo: 0,
+            pix: uuid.v4()
+          }
+        }, {
+          include: [{
+            model: database.wallets,
+            as: 'wallet'
+          }]
+        })
+      ]);
+
+
+      return novoUsuarioCriado;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  }
+
+  static async createUsuarioADM(novoUsuario) {
+    const { email } = novoUsuario;
+
+    const usuarioExistente = await database.usuarios.findOne({
+      where: {
+        email: email
+      }
+    });
+
+    if (usuarioExistente) {
+      throw new Error('Email já cadastrado. Por favor, escolha outro email.');
+    }
+
+    try {
+      
+      const senhaHash = await hash(novoUsuario.senha, 8)
+
+      const [novoUsuarioCriado, novaWalletCriada, novoWalletUsuario] = await Promise.all([
+        database.usuarios.create({
+          id: uuid.v4(),
+          nome: novoUsuario.nome,
+          email: novoUsuario.email,
+          senha: senhaHash})
+      ]);
       return novoUsuarioCriado;
     } catch (error) {
       throw new Error(error.message);
@@ -70,12 +113,12 @@ class UsuariosService {
     try {
       await database.usuarios.update(novosDadosUsuario, {
         where: {
-          id: Number(id)
+          id: String(id)
         }
       });
       const usuarioAtualizado = await database.usuarios.findOne({
         where: {
-          id: Number(id)
+          id: String(id)
         }
       });
       return usuarioAtualizado;
@@ -88,7 +131,7 @@ class UsuariosService {
     try {
       await database.usuarios.destroy({
         where: {
-          id: Number(id),
+          id: String(id)
         },
       });
     } catch (error) {
@@ -100,12 +143,12 @@ class UsuariosService {
     try {
       await database.usuarios.update(novosDadosUsuario, {
         where: {
-          id: Number(id)
+          id: String(id)
         }
       });
       const usuarioAtualizado = await database.usuarios.findOne({
         where: {
-          id: Number(id)
+          id: String(id)
         }
       });
       return usuarioAtualizado;

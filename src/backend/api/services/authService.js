@@ -17,7 +17,6 @@ class AuthService {
             throw new Error('Usuario não cadastrado')
         }
 
-
         const senhaIguais = await compare(dto.senha, usuario.senha)
 
         if (!senhaIguais) {
@@ -25,7 +24,7 @@ class AuthService {
         }
 
         const accessToken = sign({
-            id: usuario.usuario_id,
+            id: usuario.id,
             email: usuario.email
         }, jsonSecret.secret, {
             expiresIn: 86400

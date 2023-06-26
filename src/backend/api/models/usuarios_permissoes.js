@@ -1,11 +1,29 @@
 'use strict';
+const {
+  Model
+} = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  const usuarios_permissoes = sequelize.define('usuarios_permissoes', {
+  class usuarios_permissoes extends Model {
+    /**
+     * Helper method for defining associations.
+     * This method is not a part of Sequelize lifecycle.
+     * The `models/index` file will call this method automatically.
+     */
+    static associate(models) {
+      // define association here
+    }
+  }
+  usuarios_permissoes.init({
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true
+    },
     usuario_id: DataTypes.UUID,
     permissao_id: DataTypes.UUID
-  }, {});
-  usuarios_permissoes.associate = function(models) {
-    // associations can be defined here
-  };
+  }, {
+    sequelize,
+    modelName: 'usuarios_permissoes',
+  });
   return usuarios_permissoes;
 };

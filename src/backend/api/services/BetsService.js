@@ -1,4 +1,5 @@
 const database = require('../models');
+const uuid = require('uuid');
 
 class BetsService {
   static async getAllBets(limite, pagina) {
@@ -37,6 +38,17 @@ class BetsService {
 
   static async createBet(novaBet) {
     try {
+
+      const user = await database.usuarios.findOne({
+        where: {
+          id: String(novaBet.usuario_id)
+        }
+      });
+      if (!user) {
+        console.error('Usuário não encontrado');
+        return;
+      }
+
       const novaBetCriada = await database.bets.create({
         id: uuid.v4(),
         usuario_id: novaBet.usuario_id,

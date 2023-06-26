@@ -32,6 +32,16 @@ class UsuariosController {
     }
   }
 
+  static async createUsuarioADM(req, res) {
+    const novoUsuario = req.body;
+    try {
+      const novoUsuarioCriado = await UsuariosService.createUsuarioADM(novoUsuario);
+      return res.status(200).json(novoUsuarioCriado);
+    } catch (error) {
+      return res.status(500).json({ error: error.message });
+    }
+  }
+
   static async updateUsuario(req, res) {
     const { id } = req.params;
     const novosDadosUsuario = req.body;

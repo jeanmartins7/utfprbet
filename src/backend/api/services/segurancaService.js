@@ -50,6 +50,8 @@ class SegurancaService {
         await usuario.removeUsuario_roles(usuario.usuario_roles)
         await usuario.removeUsuario_permissoes(usuario.usuario_permissoes)
 
+        console.log(rolesCadastradas)
+
         await usuario.addUsuario_roles(rolesCadastradas)
         await usuario.addUsuario_permissoes(permissoesCadastradas)
 
