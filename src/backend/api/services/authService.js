@@ -29,8 +29,7 @@ class AuthService {
         }, jsonSecret.secret, {
             expiresIn: 86400
         })
-
-        return { accessToken }
+        return { accessToken}
         
     }
 }

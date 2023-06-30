@@ -9,6 +9,7 @@ router.use(autenticado)
 
 router.get('/bets', roles(["deus","adm", "jogador"]), BetsController.getAllBets);
 router.get('/bets/:id', roles(["deus","adm", "jogador"]), BetsController.getOneBet);
+router.get('/users/:userId/bets',roles(["deus","adm", "jogador"]), BetsController.getAllBetsByUserId);
 router.post('/bets', roles(["deus","adm", "jogador"]), BetsController.createBet);
 router.put('/bets/:id',roles(["deus","adm", "jogador"]), BetsController.updateBet);
 router.patch('/bets/:id', roles(["deus","adm", "jogador"]), BetsController.updatePartialBet);

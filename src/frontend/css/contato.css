@@ -1,0 +1,7 @@
+h1 {
+    margin: 30px 30px;
+}
+.col-md-4, .col-12 {
+    padding: auto;
+    margin: 30px 30px;
+}

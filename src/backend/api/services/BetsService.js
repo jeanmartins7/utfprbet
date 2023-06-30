@@ -26,11 +26,32 @@ class BetsService {
     try {
       const bet = await database.bets.findOne({
         where: {
-          id: Number(id)
-        },
-        include: [{ model: database.bets }]
+          id: String(id)
+        }
       });
       return bet;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  }
+
+
+  static async getAllBetsByUserId(userId, limite, pagina) {
+    const valoresPermitidos = [5, 10, 30];
+    const limiteValido = valoresPermitidos.includes(Number(limite));
+
+    if (!limiteValido) {
+      throw new Error('O valor do limite não é válido.');
+    }
+
+    const offset = (pagina - 1) * limite;
+    try {
+      const todasBets = await database.bets.findAndCountAll({
+        where: { usuario_id: userId },
+        limit: Number(limite),
+        offset: offset
+      });
+      return todasBets;
     } catch (error) {
       throw new Error(error.message);
     }
@@ -62,6 +83,8 @@ class BetsService {
     }
   }
 
+  
+
   static async updateBet(id, novosDadosBet) {
     try {
       await database.bets.update(novosDadosBet, {
@@ -85,7 +108,7 @@ class BetsService {
     try {
       await database.bets.destroy({
         where: {
-          id: Number(id),
+          id: String(id)
         },
       });
     } catch (error) {

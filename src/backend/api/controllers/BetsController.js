@@ -21,6 +21,17 @@ class BetsController {
       return res.status(500).json({ error: error.message });
     }
   }
+  
+  static async getAllBetsByUserId(req, res) {
+    try {
+      const { userId } = req.params;
+      const { limite = 10, pagina = 1 } = req.query;
+      const bets = await BetsService.getAllBetsByUserId(userId,limite,pagina);
+      return res.status(200).json(bets);
+    } catch (error) {
+      return res.status(500).json({ error: error.message });
+    }
+  }
 
   static async createBet(req, res) {
     const novaBet = req.body;

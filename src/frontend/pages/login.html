@@ -1,11 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UTFPRBET - LOGIN</title>
+
+  <meta name="description" content="tela de login" />
+  <link rel="stylesheet" href="../css/style-login.css" />
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-25065548-2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-25065548-2');
+  </script>
 </head>
+
 <body>
-    
+  <div class="content-body">
+    <div class="form-wrapper">
+      <form id="loginForm" class="bg-white">
+        <h1 class="text-title">Login UTFPRBET</h1>
+        <div class="field-group">
+          <label class="label" for="txt-email">Email address</label>
+          <input class="input" type="email" id="email" name="email" placeholder="johndoe@gmail.com" />
+        </div>
+        <div class="field-group">
+          <label class="label" for="txt-password">Password</label>
+          <input class="input" type="password" id="password" name="password" placeholder="Enter password" />
+        </div>
+
+        <div class="field-group">
+          <input class="btn-submit" type="submit" value="Log In" />
+        </div>
+      </form>
+
+      <div class="bg-grey">
+        <a href="#register" class="link-register">Sign Up</a>
+      </div>
+    </div>
+  </div>
+  <script src="../js/login.js"></script>
+  <footer>
+    <a href="/login-page-css/"> Back to Home </a>
+  </footer>
 </body>
+
 </html>

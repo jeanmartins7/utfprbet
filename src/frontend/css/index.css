@@ -1,0 +1,24 @@
+.cards {
+    display: flex;
+    align-items: center;
+    margin: 5rem;
+}
+
+.card{
+    margin-right: 4rem;
+    display: flex;
+    align-items: center;
+}
+
+.clearfix {
+    margin: 4rem;
+    
+}
+
+.card-body h6 {
+    color: grey;
+}
+
+.card-body p {
+    color: gray;
+}

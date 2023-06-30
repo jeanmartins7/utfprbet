@@ -12,14 +12,14 @@ const install = require('./install')
 module.exports = app => {
   app.use(
     bodyParser.json(),
+    install,
     auth,
     usuarios,
     bets,
     wallets,
     role,
     permissao,
-    seguranca,
-    install
+    seguranca    
     
   )
 }

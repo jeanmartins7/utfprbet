@@ -1,0 +1,10 @@
+.cards {
+    display: flexbox;
+    margin: 3rem;
+    align-items: center;
+}
+
+.direita {
+    margin: 4rem;
+    margin-left: 300px;
+}
