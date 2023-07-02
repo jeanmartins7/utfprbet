@@ -1,4 +1,4 @@
-const database = require('../models');
+const walletsData = require('../models/wallets');
 
 class WalletsService {
   static async getAllWallets(limite, pagina) {
@@ -11,7 +11,7 @@ class WalletsService {
 
     const offset = (pagina - 1) * limite;
     try {
-      const todasWallets = await database.wallets.findAndCountAll({
+      const todasWallets = await walletsData.findAndCountAll({
         limit: Number(limite),
         offset: offset
       });
@@ -23,7 +23,7 @@ class WalletsService {
 
   static async getOneWallet(id) {
     try {
-      const wallet = await database.wallets.findOne({
+      const wallet = await walletsData.findOne({
         where: {
           id: Number(id)
         }
@@ -36,7 +36,7 @@ class WalletsService {
 
   static async createWallet(novaWallet) {
     try {
-      const novaWalletCriada = await database.wallets.create({
+      const novaWalletCriada = await walletsData.create({
         id: uuid.v4(),
         usuario_id: novaWallet.usuario_id,
         saldo: novaWallet.saldo,
@@ -50,12 +50,12 @@ class WalletsService {
 
   static async updateWallet(id, novosDadosWallet) {
     try {
-      await database.wallets.update(novosDadosWallet, {
+      await walletsData.update(novosDadosWallet, {
         where: {
           id: Number(id),
         },
       });
-      const walletAtualizada = await database.wallets.findOne({
+      const walletAtualizada = await walletsData.findOne({
         where: {
           id: Number(id),
         },
@@ -68,7 +68,7 @@ class WalletsService {
 
   static async deleteWallet(id) {
     try {
-      await database.wallets.destroy({
+      await walletsData.destroy({
         where: {
           id: Number(id),
         },
@@ -80,12 +80,12 @@ class WalletsService {
 
   static async updatePartialWallet(id, novosDadosWallet) {
     try {
-      await database.wallets.update(novosDadosWallet, {
+      await walletsData.update(novosDadosWallet, {
         where: {
           id: Number(id),
         },
       });
-      const walletAtualizada = await database.wallets.findOne({
+      const walletAtualizada = await walletsData.findOne({
         where: {
           id: Number(id),
         },

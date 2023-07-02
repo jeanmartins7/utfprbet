@@ -1,6 +1,6 @@
 const { v4: uuidv4 } = require('uuid');
+const usuarios = require("./usuarios")
 
-'use strict';
 module.exports = (sequelize, DataTypes) => {
   const wallets = sequelize.define('wallets', {
     id: {
@@ -11,11 +11,12 @@ module.exports = (sequelize, DataTypes) => {
     saldo: DataTypes.FLOAT,
     pix: DataTypes.STRING
   }, {});
-  wallets.associate = function(models) {
-    wallets.belongsTo(models.usuarios, {
-      foreignKey: 'usuario_id',
-      as: 'user'
-    });
-  };
+
+  wallets.belongsTo(usuarios.Model, {
+    foreignKey: 'autor'
+  })
+  usuarios.Model.hasMany(wallets, { foreignKey: 'autor' })
+
   return wallets;
 };
+

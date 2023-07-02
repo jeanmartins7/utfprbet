@@ -1,4 +1,4 @@
-const database = require('../models')
+const usuariosData = require('../models/usuarios')
 const { compare } = require('bcryptjs')
 const { sign } = require('jsonwebtoken')
 const jsonSecret = require('../../../resources/db/config/jsonSecret')
@@ -6,7 +6,7 @@ const { hash } = require('bcryptjs');
 
 class AuthService {
     async login(dto) {
-        const usuario = await database.usuarios.findOne({
+        const usuario = await usuariosData.findOne({
             attributes: ['id', 'email', 'senha'],
             where: {
                 email: dto.email

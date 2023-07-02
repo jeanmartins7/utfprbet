@@ -1,4 +1,4 @@
-const database = require('../models');
+const betsData = require('../models/bets');
 const uuid = require('uuid');
 
 class BetsService {
@@ -12,7 +12,7 @@ class BetsService {
 
     const offset = (pagina - 1) * limite;
     try {
-      const todasBets = await database.bets.findAndCountAll({
+      const todasBets = await betsData.findAndCountAll({
         limit: Number(limite),
         offset: offset
       });
@@ -24,7 +24,7 @@ class BetsService {
 
   static async getOneBet(id) {
     try {
-      const bet = await database.bets.findOne({
+      const bet = await betsData.findOne({
         where: {
           id: String(id)
         }
@@ -46,7 +46,7 @@ class BetsService {
 
     const offset = (pagina - 1) * limite;
     try {
-      const todasBets = await database.bets.findAndCountAll({
+      const todasBets = await betsData.findAndCountAll({
         where: { usuario_id: userId },
         limit: Number(limite),
         offset: offset
@@ -60,7 +60,7 @@ class BetsService {
   static async createBet(novaBet) {
     try {
 
-      const user = await database.usuarios.findOne({
+      const user = await betsData.findOne({
         where: {
           id: String(novaBet.usuario_id)
         }
@@ -70,7 +70,7 @@ class BetsService {
         return;
       }
 
-      const novaBetCriada = await database.bets.create({
+      const novaBetCriada = await dbetsData.create({
         id: uuid.v4(),
         usuario_id: novaBet.usuario_id,
         valor: novaBet.valor,
@@ -87,16 +87,16 @@ class BetsService {
 
   static async updateBet(id, novosDadosBet) {
     try {
-      await database.bets.update(novosDadosBet, {
+      await betsData.update(novosDadosBet, {
         where: {
           id: Number(id)
         }
       });
-      const betAtualizada = await database.bets.findOne({
+      const betAtualizada = await betsData.findOne({
         where: {
           id: Number(id)
         },
-        include: [{ model: database.bets }]
+        include: [{ model: betsData }]
       });
       return betAtualizada;
     } catch (error) {
@@ -106,7 +106,7 @@ class BetsService {
 
   static async deleteBet(id) {
     try {
-      await database.bets.destroy({
+      await betsData.destroy({
         where: {
           id: String(id)
         },
@@ -118,16 +118,16 @@ class BetsService {
 
   static async updatePartialBet(id, novosDadosBet) {
     try {
-      await database.bets.update(novosDadosBet, {
+      await betsData.update(novosDadosBet, {
         where: {
           id: Number(id)
         }
       });
-      const betAtualizada = await database.bets.findOne({
+      const betAtualizada = await betsData.findOne({
         where: {
           id: Number(id)
         },
-        include: [{ model: database.bets }]
+        include: [{ model: betsData }]
       });
       return betAtualizada;
     } catch (error) {

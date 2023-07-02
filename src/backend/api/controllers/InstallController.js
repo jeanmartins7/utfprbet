@@ -1,19 +1,14 @@
-const InstallService = require('../services/installService');
-
+const InstallService = require('../services/installService')
 class InstallController {
-  static async install(req, res) {
-    const installService = new InstallService();
-
-    try {
-      await installService.createTables();
-      await installService.populateTables();
-
-      res.send('Instalação concluída com sucesso.');
-    } catch (error) {
-      console.error('Erro durante a instalação:', error);
-      res.status(500).send('Erro durante a instalação.');
-    }
-  }
+    static async getInstall(req, res) {
+ 
+        try {
+          const seed = await InstallService.getInstall();
+          return res.status(200).json(seed);
+        } catch (error) {
+          return res.status(400).json({ error: error.message });
+        }
+      }
 }
 
-module.exports = InstallController;
+module.exports = InstallController

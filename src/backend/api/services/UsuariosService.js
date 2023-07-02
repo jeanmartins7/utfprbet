@@ -1,4 +1,5 @@
-const database = require('../models');
+const usuarioData = require("../models/usuarios")
+const walletData = require("../models/wallets")
 const { hash } = require('bcryptjs');
 const uuid = require('uuid');
 
@@ -13,7 +14,7 @@ class UsuariosService {
 
     const offset = (pagina - 1) * limite;
     try {
-      const todosUsuarios = await database.usuarios.findAndCountAll({
+      const todosUsuarios = await usuarioData.findAndCountAll({
         limit: Number(limite),
         offset: offset
       });
@@ -25,7 +26,7 @@ class UsuariosService {
 
   static async getOneUsuario(id) {
     try {
-      const usuario = await database.usuarios.findOne({
+      const usuario = await usuarioData.findOne({
         where: {
           id: String(id)
         }
@@ -39,7 +40,7 @@ class UsuariosService {
   static async createUsuario(novoUsuario) {
     const { email } = novoUsuario;
 
-    const usuarioExistente = await database.usuarios.findOne({
+    const usuarioExistente = await usuarioData.findOne({
       where: {
         email: email
       }
@@ -53,8 +54,8 @@ class UsuariosService {
       
       const senhaHash = await hash(novoUsuario.senha, 8)
 
-      const [novoUsuarioCriado, novaWalletCriada, novoWalletUsuario] = await Promise.all([
-        database.usuarios.create({
+      const [novoUsuarioCriado] = await Promise.all([
+        usuarioData.create({
           id: uuid.v4(),
           nome: novoUsuario.nome,
           email: novoUsuario.email,
@@ -66,7 +67,7 @@ class UsuariosService {
           }
         }, {
           include: [{
-            model: database.wallets,
+            model: walletData,
             as: 'wallet'
           }]
         })
@@ -79,44 +80,14 @@ class UsuariosService {
     }
   }
 
-  static async createUsuarioADM(novoUsuario) {
-    const { email } = novoUsuario;
-
-    const usuarioExistente = await database.usuarios.findOne({
-      where: {
-        email: email
-      }
-    });
-
-    if (usuarioExistente) {
-      throw new Error('Email já cadastrado. Por favor, escolha outro email.');
-    }
-
-    try {
-      
-      const senhaHash = await hash(novoUsuario.senha, 8)
-
-      const [novoUsuarioCriado, novaWalletCriada, novoWalletUsuario] = await Promise.all([
-        database.usuarios.create({
-          id: uuid.v4(),
-          nome: novoUsuario.nome,
-          email: novoUsuario.email,
-          senha: senhaHash})
-      ]);
-      return novoUsuarioCriado;
-    } catch (error) {
-      throw new Error(error.message);
-    }
-  }
-
   static async updateUsuario(id, novosDadosUsuario) {
     try {
-      await database.usuarios.update(novosDadosUsuario, {
+      await usuarioData.update(novosDadosUsuario, {
         where: {
           id: String(id)
         }
       });
-      const usuarioAtualizado = await database.usuarios.findOne({
+      const usuarioAtualizado = await usuarioData.findOne({
         where: {
           id: String(id)
         }
@@ -129,7 +100,7 @@ class UsuariosService {
 
   static async deleteUsuario(id) {
     try {
-      await database.usuarios.destroy({
+      await usuarioData.destroy({
         where: {
           id: String(id)
         },
@@ -141,12 +112,12 @@ class UsuariosService {
 
   static async updatePartialUsuario(id, novosDadosUsuario) {
     try {
-      await database.usuarios.update(novosDadosUsuario, {
+      await usuarioData.update(novosDadosUsuario, {
         where: {
           id: String(id)
         }
       });
-      const usuarioAtualizado = await database.usuarios.findOne({
+      const usuarioAtualizado = await usuarioData.findOne({
         where: {
           id: String(id)
         }
