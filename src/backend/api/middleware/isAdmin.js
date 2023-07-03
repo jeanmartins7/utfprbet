@@ -3,7 +3,6 @@ const UsuariosService = require('../services/UsuariosService');
 const isAdmin = () => {
     return async (req, res, next) => {
         const { usuarioId } = req
-        console.log("entrou")
         try {
 
             const usuario = await UsuariosService.getOneUsuario(usuarioId);

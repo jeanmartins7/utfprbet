@@ -103,7 +103,7 @@ for (let i = 0; i < cookies.length; i++) {
 const data = {
   nome: 'deus',
   email: 'deus@gmail.com',
-  usuario_id: '1f9238ae-9286-4cf5-80eb-d7859e03c1f7'
+  usuario_id: 'dce1059d-7b9d-45b3-991e-ca2314cd7058'
 }
 
 carregarBets(data.usuario_id, accessToken);

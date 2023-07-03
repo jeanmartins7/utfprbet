@@ -9,9 +9,9 @@ const router = Router()
 router.use(autenticado)
 
 router.get('/bets', isAdmin(), BetsController.getAllBets);
-router.get('/bets/:id', verificaUsuario, BetsController.getOneBet);
-router.get('/users/:userId/bets', BetsController.getAllBetsByUserId);
-router.post('/bets', BetsController.createBet);
+router.get('/bets/:id', verificaUsuario(), BetsController.getOneBet);
+router.get('/users/:userId/bets', verificaUsuario(), BetsController.getAllBetsByUserId);
+router.post('/bets', verificaUsuario(), BetsController.createBet);
 router.put('/bets/:id', isAdmin(), BetsController.updateBet);
 router.patch('/bets/:id', verificaUsuario, BetsController.updatePartialBet);
 router.delete('/bets/:id',verificaUsuario, BetsController.deleteBet);
