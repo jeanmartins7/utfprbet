@@ -51,7 +51,7 @@ class UsuariosService {
     }
 
     try {
-      
+
       const senhaHash = await hash(novoUsuario.senha, 8)
 
       const [novoUsuarioCriado] = await Promise.all([
@@ -60,7 +60,51 @@ class UsuariosService {
           nome: novoUsuario.nome,
           email: novoUsuario.email,
           senha: senhaHash,
-          admin:novoUsuario.admin,
+          admin: novoUsuario.admin,
+          wallet: {
+            id: uuid.v4(),
+            saldo: 0,
+            pix: uuid.v4()
+          }
+        }, {
+          include: [{
+            model: walletData,
+            as: 'wallet'
+          }]
+        })
+      ]);
+
+
+      return novoUsuarioCriado;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  }
+
+  static async createUsuarioADM(novoUsuario) {
+    const { email } = novoUsuario;
+
+    const usuarioExistente = await usuarioData.findOne({
+      where: {
+        email: email
+      }
+    });
+
+    if (usuarioExistente) {
+      throw new Error('Email já cadastrado. Por favor, escolha outro email.');
+    }
+
+    try {
+
+      const senhaHash = await hash(novoUsuario.senha, 8)
+
+      const [novoUsuarioCriado] = await Promise.all([
+        usuarioData.create({
+          id: uuid.v4(),
+          nome: novoUsuario.nome,
+          email: novoUsuario.email,
+          senha: senhaHash,
+          admin: true,
           wallet: {
             id: uuid.v4(),
             saldo: 0,
