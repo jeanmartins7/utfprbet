@@ -25,7 +25,7 @@ class WalletsService {
     try {
       const wallet = await walletsData.findOne({
         where: {
-          id: Number(id)
+          id: String(id)
         }
       });
       return wallet;
@@ -52,12 +52,12 @@ class WalletsService {
     try {
       await walletsData.update(novosDadosWallet, {
         where: {
-          id: Number(id),
+          id: String(id),
         },
       });
       const walletAtualizada = await walletsData.findOne({
         where: {
-          id: Number(id),
+          id: String(id),
         },
       });
       return walletAtualizada;
@@ -70,7 +70,7 @@ class WalletsService {
     try {
       await walletsData.destroy({
         where: {
-          id: Number(id),
+          id: String(id),
         },
       });
     } catch (error) {
@@ -82,12 +82,12 @@ class WalletsService {
     try {
       await walletsData.update(novosDadosWallet, {
         where: {
-          id: Number(id),
+          id: String(id),
         },
       });
       const walletAtualizada = await walletsData.findOne({
         where: {
-          id: Number(id),
+          id: String(id),
         },
       });
       return walletAtualizada;

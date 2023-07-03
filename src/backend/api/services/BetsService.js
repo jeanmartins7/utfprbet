@@ -90,12 +90,12 @@ class BetsService {
     try {
       await betsData.update(novosDadosBet, {
         where: {
-          id: Number(id)
+          id: String(id)
         }
       });
       const betAtualizada = await betsData.findOne({
         where: {
-          id: Number(id)
+          id: String(id)
         },
         include: [{ model: betsData }]
       });
@@ -121,12 +121,12 @@ class BetsService {
     try {
       await betsData.update(novosDadosBet, {
         where: {
-          id: Number(id)
+          id: String(id)
         }
       });
       const betAtualizada = await betsData.findOne({
         where: {
-          id: Number(id)
+          id: String(id)
         },
         include: [{ model: betsData }]
       });
