@@ -1,17 +1,29 @@
 const { v4: uuidv4 } = require('uuid');
+const { DataTypes } = require('sequelize');
+const sequelize = require('../services/SequelizeService');
 
-module.exports = (sequelize, DataTypes) => {
-  const bets = sequelize.define('bets', {
-    id: {
-      type: DataTypes.UUID,
-      defaultValue: () => uuidv4(),
-      primaryKey: true
-    },
-    valor: DataTypes.FLOAT,
-    disciplina: DataTypes.STRING,
-    usuario_id: DataTypes.UUID,
-    chute: DataTypes.STRING
-  }, {});
+const bets = sequelize.define('bets', {
+  id: {
+    type: DataTypes.UUID,
+    defaultValue: () => uuidv4(),
+    primaryKey: true
+  },
+  valor: {
+    type: DataTypes.FLOAT,
+    allowNull: false
+  },
+  disciplina: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  usuario_id: {
+    type: DataTypes.UUID,
+    allowNull: false
+  },
+  chute: {
+    type: DataTypes.STRING,
+    defaultValue: false
+  }
+});
 
-  return bets;
-};
+module.exports = bets;

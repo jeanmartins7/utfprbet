@@ -1,4 +1,5 @@
 const betsData = require('../models/bets');
+const usuariosData = require("../models/usuarios")
 const uuid = require('uuid');
 
 class BetsService {
@@ -46,7 +47,7 @@ class BetsService {
 
     const offset = (pagina - 1) * limite;
     try {
-      const todasBets = await betsData.findAndCountAll({
+      const todasBets = await usuariosData.findAndCountAll({
         where: { usuario_id: userId },
         limit: Number(limite),
         offset: offset
@@ -60,7 +61,7 @@ class BetsService {
   static async createBet(novaBet) {
     try {
 
-      const user = await betsData.findOne({
+      const user = await usuariosData.findOne({
         where: {
           id: String(novaBet.usuario_id)
         }
@@ -70,7 +71,7 @@ class BetsService {
         return;
       }
 
-      const novaBetCriada = await dbetsData.create({
+      const novaBetCriada = await betsData.create({
         id: uuid.v4(),
         usuario_id: novaBet.usuario_id,
         valor: novaBet.valor,

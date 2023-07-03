@@ -1,22 +1,31 @@
 const { v4: uuidv4 } = require('uuid');
+const { DataTypes } = require('sequelize');
+const sequelize = require('../services/SequelizeService');
 const usuarios = require("./usuarios")
 
-module.exports = (sequelize, DataTypes) => {
-  const wallets = sequelize.define('wallets', {
-    id: {
-      type: DataTypes.UUID,
-      defaultValue: () => uuidv4(),
-      primaryKey: true
-    },
-    saldo: DataTypes.FLOAT,
-    pix: DataTypes.STRING
-  }, {});
+const wallets = sequelize.define('wallets', {
+  id: {
+    type: DataTypes.UUID,
+    defaultValue: () => uuidv4(),
+    primaryKey: true
+  },
+  saldo: {
+    type: DataTypes.FLOAT,
+    allowNull: false
+  },
+  pix: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    unique: true
+  }
+});
 
-  wallets.belongsTo(usuarios.Model, {
-    foreignKey: 'autor'
-  })
-  usuarios.Model.hasMany(wallets, { foreignKey: 'autor' })
+wallets.belongsTo(usuarios, {
+  constraint: true,
+  foreignKey: "usuarios_id"
+})  
 
-  return wallets;
-};
+usuarios.hasOne(wallets, {foreignKey: "usuarios_id"})
 
+
+module.exports = wallets;

@@ -60,6 +60,7 @@ class UsuariosService {
           nome: novoUsuario.nome,
           email: novoUsuario.email,
           senha: senhaHash,
+          admin:novoUsuario.admin,
           wallet: {
             id: uuid.v4(),
             saldo: 0,
