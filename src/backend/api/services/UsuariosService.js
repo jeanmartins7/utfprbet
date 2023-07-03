@@ -127,6 +127,8 @@ class UsuariosService {
 
   static async updateUsuario(id, novosDadosUsuario) {
     try {
+      const senhaHash = await hash(novosDadosUsuario.senha, 8)
+      novosDadosUsuario.senha = senhaHash;
       await usuarioData.update(novosDadosUsuario, {
         where: {
           id: String(id)
@@ -157,6 +159,8 @@ class UsuariosService {
 
   static async updatePartialUsuario(id, novosDadosUsuario) {
     try {
+      const senhaHash = await hash(novosDadosUsuario.senha, 8)
+      novosDadosUsuario.senha = senhaHash;
       await usuarioData.update(novosDadosUsuario, {
         where: {
           id: String(id)

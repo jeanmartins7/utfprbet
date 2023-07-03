@@ -1,4 +1,5 @@
 const UsuariosService = require('../services/UsuariosService');
+const isAdmin = require('../middleware/isAdmin')
 
 class UsuariosController {
   static async getAllUsuarios(req, res) {
@@ -67,6 +68,9 @@ class UsuariosController {
     const { id } = req.params;
     const novosDadosUsuario = req.body;
     try {
+      if (novosDadosUsuario.admin) {
+        return res.status(401).json({ error: 'Não permitido.' });
+      }
       const usuarioAtualizado = await UsuariosService.updatePartialUsuario(id, novosDadosUsuario);
       return res.status(200).json(usuarioAtualizado);
     } catch (error) {
