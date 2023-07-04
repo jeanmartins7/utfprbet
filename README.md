@@ -18,13 +18,14 @@ Este é um projeto fullstack para um site de apostas universitárias, cuja o cor
 Antes de iniciar o backend, você precisará configurar algumas variáveis de ambiente.
 
 1. Crie um arquivo .env na raiz do diretório do backend.
-2. EdAbra o arquivo .env e defina as seguintes variáveis de ambiente:
+2. E abra o arquivo .env e defina as seguintes variáveis de ambiente:
 `DB_HOST=
 DB_PORT=
 DB_DATABASE=
 DB_USERNAME=
 DB_PASSWORD=
 DB_DIALECT=`
+3. O projeto também possui configurado um banco de dados MySql configurado para ser utilizado o docker.
 
 ## Uso
 
