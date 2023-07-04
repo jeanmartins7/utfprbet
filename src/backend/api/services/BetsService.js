@@ -57,12 +57,13 @@ class BetsService {
     }
   }
 
-  static async createBet(novaBet) {
+  static async createBet(novaBet, usuarioId) {
+    
     try {
-
+      const usuario_id = usuarioId;
       const user = await usuariosData.findOne({
         where: {
-          id: String(novaBet.usuario_id)
+          id: String(usuario_id)
         }
       });
       if (!user) {
@@ -72,7 +73,7 @@ class BetsService {
 
       const novaBetCriada = await betsData.create({
         id: uuid.v4(),
-        usuario_id: novaBet.usuario_id,
+        usuario_id: usuario_id,
         valor: novaBet.valor,
         disciplina: novaBet.disciplina,
         chute: novaBet.chute

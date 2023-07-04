@@ -25,7 +25,6 @@ class BetsController {
   static async getAllBetsByUserId(req, res) {
     try {
       const { usuarioId } = req
-      console.log(usuarioId)
       const { limite = 10, pagina = 1 } = req.query;
       const bets = await BetsService.getAllBetsByUserId(usuarioId,limite,pagina);
       return res.status(200).json(bets);
@@ -36,8 +35,9 @@ class BetsController {
 
   static async createBet(req, res) {
     const novaBet = req.body;
+    const { usuarioId } = req
     try {
-      const novaBetCriada = await BetsService.createBet(novaBet);
+      const novaBetCriada = await BetsService.createBet(novaBet,usuarioId);
       return res.status(200).json(novaBetCriada);
     } catch (error) {
       return res.status(500).json({ error: error.message });
