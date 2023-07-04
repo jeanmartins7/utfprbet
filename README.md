@@ -10,7 +10,7 @@ Este é um projeto fullstack para um site de apostas universitárias, cuja o cor
 
 ## Instalação
 
-1. Clone o repositório: `git clone https://github.com/seu-usuario/seu-projeto.git`
+1. Clone o repositório: `git clone git@github.com:jeanmartins7/utfprbet.git`
 2. Instale as dependências: `npm install`
 
 ## Configuração
