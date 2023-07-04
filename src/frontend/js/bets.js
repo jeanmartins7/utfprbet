@@ -35,7 +35,6 @@ function createCard(title, discipline, value, betStatus) {
   const cancelButton = document.createElement('button');
   cancelButton.textContent = 'Cancelar aposta';
 
-  // Adiciona o evento de clique ao botão "Cancelar aposta"
   cancelButton.addEventListener('click', function() {
     removeBet(title, accessToken);
     removeCard(cardDiv);
@@ -53,12 +52,11 @@ function createCard(title, discipline, value, betStatus) {
 
   cardDiv.appendChild(cardBodyDiv);
 
-  // Retorna o card criado
   return cardDiv;
 }
 
-function carregarBets(usuario_id, accessToken) {
-  axios.get('http://localhost:3000/users/' + usuario_id + '/bets', {
+function carregarBets(accessToken) {
+  axios.get('http://localhost:3000/users/bets', {
     headers: {
       Authorization: 'Bearer ' + accessToken
     }
@@ -68,8 +66,6 @@ function carregarBets(usuario_id, accessToken) {
 }
 
 function removeCard(card) {
-  console.log(card.id)
-  
   card.remove();
 }
 
@@ -100,13 +96,7 @@ for (let i = 0; i < cookies.length; i++) {
   }
 }
 
-const data = {
-  nome: 'deus',
-  email: 'deus@gmail.com',
-  usuario_id: 'dce1059d-7b9d-45b3-991e-ca2314cd7058'
-}
-
-carregarBets(data.usuario_id, accessToken);
+carregarBets(accessToken);
 
 function processarObjetos(objetos) {
   objetos.rows.forEach(objeto => {

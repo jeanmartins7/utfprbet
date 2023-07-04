@@ -14,7 +14,7 @@ form.addEventListener('submit', function(event) {
   axios.post('http://localhost:3000/auth/login', userData)
     .then(res => {
       const accessToken = res.data.accessToken;
-      document.cookie = `accessToken=${accessToken}; path=/`;
+      document.cookie = `accessToken=${accessToken}`;
       window.location.href = 'shop.html';
     })
     .catch(err => alert('Email ou Senha inválidos'));

@@ -36,7 +36,6 @@ class BetsService {
     }
   }
 
-
   static async getAllBetsByUserId(userId, limite, pagina) {
     const valoresPermitidos = [5, 10, 30];
     const limiteValido = valoresPermitidos.includes(Number(limite));
@@ -47,7 +46,7 @@ class BetsService {
 
     const offset = (pagina - 1) * limite;
     try {
-      const todasBets = await usuariosData.findAndCountAll({
+      const todasBets = await betsData.findAndCountAll({
         where: { usuario_id: userId },
         limit: Number(limite),
         offset: offset
@@ -82,9 +81,7 @@ class BetsService {
     } catch (error) {
       throw new Error(error.message);
     }
-  }
-
-  
+  }  
 
   static async updateBet(id, novosDadosBet) {
     try {

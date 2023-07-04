@@ -24,9 +24,10 @@ class BetsController {
   
   static async getAllBetsByUserId(req, res) {
     try {
-      const { userId } = req.params;
+      const { usuarioId } = req
+      console.log(usuarioId)
       const { limite = 10, pagina = 1 } = req.query;
-      const bets = await BetsService.getAllBetsByUserId(userId,limite,pagina);
+      const bets = await BetsService.getAllBetsByUserId(usuarioId,limite,pagina);
       return res.status(200).json(bets);
     } catch (error) {
       return res.status(500).json({ error: error.message });
@@ -56,6 +57,7 @@ class BetsController {
 
   static async deleteBet(req, res) {
     const { id } = req.params;
+
     try {
       await BetsService.deleteBet(id);
       return res.status(200).json({ message: 'Aposta deletada com sucesso.' });

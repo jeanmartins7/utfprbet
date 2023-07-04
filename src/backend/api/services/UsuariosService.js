@@ -74,7 +74,6 @@ class UsuariosService {
         })
       ]);
 
-
       return novoUsuarioCriado;
     } catch (error) {
       throw new Error(error.message);
